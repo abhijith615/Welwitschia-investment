@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "welwitschia-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "cwd": "C:\\Users\\Abjith\\Desktop\\Welwetschia Investment\\welwitschia-investment"
+    }
+  ]
+}

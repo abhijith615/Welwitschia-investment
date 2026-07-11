@@ -1,0 +1,359 @@
+@import "tailwindcss";
+
+@theme {
+  /* Strictly two brand hues: aqua-blue and gold.
+     The canvas is a deep midnight-aqua; every neutral is cooled toward it. */
+  --color-navy: #05171f;
+  --color-navy-2: #072028;
+  --color-navy-3: #0a2c38;
+  --color-aqua: #1c93b7;
+  --color-aqua-soft: #5ccde8;
+  --color-aqua-deep: #0d5f78;
+  --color-gold: #c8a65a;
+  --color-gold-2: #e2c26f;
+  --color-gold-bright: #f2d98f;
+  --color-ivory: #dceef3;
+  --color-white-soft: #f3fbfd;
+  --color-graphite: #0c2530;
+
+  --font-display: var(--font-bodoni), "Bodoni Moda", serif;
+  --font-serif-alt: var(--font-cormorant), "Cormorant Garamond", serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+}
+
+:root {
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --gold-hairline: linear-gradient(
+    90deg,
+    transparent,
+    rgba(200, 166, 90, 0.55),
+    transparent
+  );
+}
+
+html {
+  background: var(--color-navy);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  background: var(--color-navy);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgba(200, 166, 90, 0.32);
+  color: var(--color-white-soft);
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #04141b;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1c3a45, #123039);
+  border-radius: 8px;
+  border: 2px solid #04141b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #235061;
+}
+
+/* ---------- film grain ---------- */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 9s steps(10) infinite;
+}
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-3%, -6%); }
+  30% { transform: translate(4%, 2%); }
+  50% { transform: translate(-4%, 7%); }
+  70% { transform: translate(6%, -3%); }
+  90% { transform: translate(-2%, 4%); }
+}
+
+/* ---------- vignette ---------- */
+.vignette::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 89;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 120% 90% at 50% 45%,
+    transparent 55%,
+    rgba(3, 8, 12, 0.5) 100%
+  );
+}
+
+/* ---------- glass ---------- */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.075),
+    rgba(255, 255, 255, 0.028)
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+/* ---------- typographic helpers ---------- */
+.text-gold-sheen {
+  background: linear-gradient(
+    100deg,
+    #cba75c 0%,
+    #e9cd85 28%,
+    #f6e7b4 46%,
+    #dcb96c 62%,
+    #cba75c 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-pan 9s ease-in-out infinite;
+}
+@keyframes gold-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 2.75rem;
+  height: 1px;
+  background: var(--gold-hairline);
+  background-size: 100% 100%;
+}
+
+.hairline {
+  height: 1px;
+  background: var(--gold-hairline);
+}
+
+/* ---------- buttons ---------- */
+.btn-lux {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.15rem 2.6rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: color 0.5s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-lux::after {
+  /* light sweep */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 244, 214, 0.22) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.btn-lux:hover::after {
+  transform: translateX(120%);
+}
+.btn-gold {
+  color: #0a141d;
+  background: linear-gradient(160deg, #e2c26f, #c8a65a 55%, #b3924c);
+  box-shadow:
+    0 1px 0 rgba(255, 235, 190, 0.55) inset,
+    0 18px 44px -14px rgba(200, 166, 90, 0.45);
+}
+.btn-gold:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 235, 190, 0.65) inset,
+    0 22px 54px -12px rgba(200, 166, 90, 0.6);
+}
+.btn-outline {
+  color: var(--color-ivory);
+  border: 1px solid rgba(200, 166, 90, 0.55);
+  background: rgba(200, 166, 90, 0.05);
+}
+.btn-outline:hover {
+  border-color: rgba(226, 194, 111, 0.9);
+  background: rgba(200, 166, 90, 0.1);
+}
+
+/* ---------- inputs ---------- */
+.input-lux {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0.9rem 0 0.7rem;
+  font-size: 0.95rem;
+  color: var(--color-white-soft);
+  outline: none;
+  transition: border-color 0.4s ease;
+}
+.input-lux::placeholder {
+  color: rgba(248, 245, 238, 0.32);
+}
+.input-lux:focus {
+  border-color: rgba(200, 166, 90, 0.8);
+}
+
+/* underline grows on focus */
+.field {
+  position: relative;
+}
+.field::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, #c8a65a, #5ccde8);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.field:focus-within::after {
+  transform: scaleX(1);
+}
+
+/* ---------- card corner ticks (collectible products) ---------- */
+.corner-ticks::before,
+.corner-ticks::after,
+.corner-ticks > .tick::before,
+.corner-ticks > .tick::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(200, 166, 90, 0.65);
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.corner-ticks::before {
+  top: 10px;
+  left: 10px;
+  border-width: 1px 0 0 1px;
+  transform: translate(6px, 6px);
+}
+.corner-ticks::after {
+  top: 10px;
+  right: 10px;
+  border-width: 1px 1px 0 0;
+  transform: translate(-6px, 6px);
+}
+.corner-ticks > .tick::before {
+  bottom: 10px;
+  left: 10px;
+  border-width: 0 0 1px 1px;
+  transform: translate(6px, -6px);
+}
+.corner-ticks > .tick::after {
+  bottom: 10px;
+  right: 10px;
+  border-width: 0 1px 1px 0;
+  transform: translate(-6px, -6px);
+}
+.corner-ticks:hover::before,
+.corner-ticks:hover::after,
+.corner-ticks:hover > .tick::before,
+.corner-ticks:hover > .tick::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ---------- nav link underline ---------- */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #c8a65a, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- logo light sweep ---------- */
+.logo-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.logo-sheen::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    115deg,
+    transparent 42%,
+    rgba(255, 246, 220, 0.16) 50%,
+    transparent 58%
+  );
+  transform: translateX(-80%) rotate(0.001deg);
+  animation: logo-sweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes logo-sweep {
+  0%, 62% { transform: translateX(-80%); }
+  82%, 100% { transform: translateX(80%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after,
+  .logo-sheen::after,
+  .text-gold-sheen {
+    animation: none !important;
+  }
+}
