@@ -45,3 +45,6 @@ Thumbs.db
 
 # temporary logo-preview artifacts
 preview-*.jpg
+
+# heavy raw source media (optimised versions live in public/)
+design-source/media-raw/

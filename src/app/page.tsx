@@ -8,7 +8,6 @@ import Values from "@/components/Values";
 import Services from "@/components/Services";
 import Products from "@/components/Products";
 import WhyUs from "@/components/WhyUs";
-import Story from "@/components/Story";
 import Trust from "@/components/Trust";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -27,7 +26,6 @@ export default function Home() {
         <Services />
         <Products />
         <WhyUs />
-        <Story />
         <Trust />
         <Contact />
       </main>

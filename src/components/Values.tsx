@@ -53,23 +53,38 @@ export default function Values() {
           scrollTrigger: { trigger: ".values-row", start: "top 82%" },
         }
       );
-      // background hue drifts subtly as you pass through
-      gsap.fromTo(
-        root,
-        { backgroundColor: "#f4ebe0" },
-        {
-          backgroundColor: "#ece0d1",
-          ease: "none",
-          scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: 1.5 },
-        }
-      );
+      // slow parallax drift on the architectural backdrop
+      gsap.to(".values-bg", {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: 1.2 },
+      });
     }, root);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={rootRef} id="values" className="surface-cream relative overflow-hidden py-36 md:py-44">
-      <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+    <section ref={rootRef} id="values" className="surface-teal relative overflow-hidden py-36 md:py-44">
+      {/* architectural backdrop */}
+      <div aria-hidden className="absolute inset-0 overflow-hidden">
+        <div
+          className="values-bg absolute -top-[8%] left-0 h-[116%] w-full bg-cover will-change-transform"
+          style={{ backgroundImage: "url(/values-bg.webp)", backgroundPosition: "center right" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(7,31,40,0.88) 0%, rgba(9,36,46,0.74) 42%, rgba(7,29,38,0.93) 100%)",
+          }}
+        />
+      </div>
+      {/* transition down from the cream section above */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#efe3d5] to-transparent"
+      />
+      <div className="relative mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-24 text-center">
           <p className="eyebrow justify-center" data-reveal="fade">
             Our Values

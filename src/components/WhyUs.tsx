@@ -200,6 +200,11 @@ export default function WhyUs() {
             "radial-gradient(ellipse 60% 40% at 78% 18%, rgba(28,147,183,0.07), transparent 62%), radial-gradient(ellipse 50% 40% at 12% 88%, rgba(226,194,111,0.05), transparent 66%)",
         }}
       />
+      {/* transition down from the dark Products section above */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#07202a] to-transparent"
+      />
 
       {/* header */}
       <div className="relative mx-auto max-w-[1440px] px-6 pt-32 md:px-12 md:pt-44">

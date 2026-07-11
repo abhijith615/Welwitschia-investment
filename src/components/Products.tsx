@@ -68,13 +68,38 @@ export default function Products() {
           scrollTrigger: { trigger: ".products-grid", start: "top 85%" },
         }
       );
+      // slow parallax on the crystalline backdrop
+      gsap.to(".products-bg", {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: 1.2 },
+      });
     }, root);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={rootRef} id="products" className="surface-cream relative overflow-hidden py-36 md:py-48">
-      <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+    <section ref={rootRef} id="products" className="surface-teal relative overflow-hidden py-36 md:py-48">
+      {/* crystalline backdrop */}
+      <div aria-hidden className="absolute inset-0 overflow-hidden">
+        <div
+          className="products-bg absolute -top-[8%] left-0 h-[116%] w-full bg-cover bg-center will-change-transform"
+          style={{ backgroundImage: "url(/products-bg.webp)" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(6,26,34,0.90) 0%, rgba(8,32,42,0.76) 44%, rgba(6,24,32,0.94) 100%)",
+          }}
+        />
+      </div>
+      {/* transition down from the cream section above */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#efe3d5] to-transparent"
+      />
+      <div className="relative mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-24 text-center">
           <p className="eyebrow justify-center" data-reveal="fade">
             Investment Products
@@ -99,7 +124,7 @@ export default function Products() {
           {PRODUCTS.map((p) => (
             <article
               key={p.title}
-              className="product-card corner-ticks group relative overflow-hidden rounded-lg border border-hair bg-[#fdfaf4] p-8 pt-10 shadow-[0_18px_50px_-30px_rgba(20,48,55,0.25)] transition-all duration-700 hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_36px_80px_-26px_rgba(200,166,90,0.3)]"
+              className="product-card corner-ticks group relative overflow-hidden rounded-lg border border-white/[0.09] bg-[#0a2734]/60 p-8 pt-10 backdrop-blur-md transition-all duration-700 hover:-translate-y-2 hover:border-gold/40 hover:bg-[#0c2c3a]/70 hover:shadow-[0_36px_80px_-24px_rgba(200,166,90,0.32)]"
               style={{ minHeight: 320 }}
             >
               <span className="tick" aria-hidden />

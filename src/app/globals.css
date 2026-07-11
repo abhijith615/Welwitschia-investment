@@ -86,6 +86,24 @@ body {
   );
 }
 
+/* re-points colour tokens back to their light-on-dark values without painting
+   a background — for text sitting over a dark image/scrim inside a cream section */
+.on-dark {
+  --color-white-soft: #f6fbfa;
+  --color-ivory: #e9f2f1;
+  --color-gold: #c8a65a;
+  --color-gold-2: #e2c26f;
+  --color-aqua: #1c93b7;
+  --color-aqua-soft: #5ccde8;
+  --hair: rgba(255, 255, 255, 0.12);
+  --gold-hairline: linear-gradient(
+    90deg,
+    transparent,
+    rgba(200, 166, 90, 0.55),
+    transparent
+  );
+}
+
 .border-hair {
   border-color: var(--hair);
 }

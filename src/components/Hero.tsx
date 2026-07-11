@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { gsap, SplitText, prefersReducedMotion } from "@/lib/gsapSetup";
 import Magnetic from "@/components/Magnetic";
 import RibbonField from "@/components/RibbonField";
+import HeroVideo from "@/components/HeroVideo";
 
 const STATS = [
   { value: 20, suffix: "+", label: "Investment Strategies" },
@@ -15,7 +15,6 @@ const STATS = [
 
 export default function Hero() {
   const rootRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -24,7 +23,6 @@ export default function Hero() {
     const reduced = prefersReducedMotion();
 
     const ctx = gsap.context(() => {
-      gsap.set(q(".hero-logo"), { opacity: 0, y: 30, scale: 0.94, filter: "blur(10px)" });
       gsap.set(q(".hero-tag-line"), { opacity: 0, y: 18 });
       gsap.set(q(".hero-cta"), { opacity: 0, y: 24 });
       gsap.set(q(".hero-stat"), { opacity: 0, y: 26 });
@@ -44,7 +42,7 @@ export default function Hero() {
       const play = () => {
         if (reduced) {
           gsap.set(
-            [q(".hero-logo"), split.chars, q(".hero-tag-line"), q(".hero-cta"), q(".hero-stat"), q(".hero-scroll-hint")],
+            [split.chars, q(".hero-tag-line"), q(".hero-cta"), q(".hero-stat"), q(".hero-scroll-hint")],
             { opacity: 1, y: 0, yPercent: 0, scale: 1, filter: "blur(0px)" }
           );
           restore();
@@ -52,24 +50,23 @@ export default function Hero() {
           return;
         }
         const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-        tl.to(q(".hero-logo"), { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 1.8 }, 0.2)
-          .to(
-            split.chars,
-            {
-              yPercent: 0,
-              opacity: 1,
-              filter: "blur(0px)",
-              duration: 1.3,
-              stagger: 0.022,
-              onComplete: restore,
-            },
-            0.75
-          )
-          .to(q(".hero-tag-line"), { opacity: 1, y: 0, duration: 1.1, stagger: 0.22 }, 1.7)
-          .to(q(".hero-cta"), { opacity: 1, y: 0, duration: 1.1, stagger: 0.14 }, 2.1)
-          .to(q(".hero-stat"), { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 2.4)
-          .add(() => countUp(false), 2.4)
-          .to(q(".hero-scroll-hint"), { opacity: 0.55, duration: 1.2 }, 3.1);
+        tl.to(
+          split.chars,
+          {
+            yPercent: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 1.3,
+            stagger: 0.024,
+            onComplete: restore,
+          },
+          0.3
+        )
+          .to(q(".hero-tag-line"), { opacity: 1, y: 0, duration: 1.1, stagger: 0.22 }, 1.2)
+          .to(q(".hero-cta"), { opacity: 1, y: 0, duration: 1.1, stagger: 0.14 }, 1.6)
+          .to(q(".hero-stat"), { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 1.9)
+          .add(() => countUp(false), 1.9)
+          .to(q(".hero-scroll-hint"), { opacity: 0.55, duration: 1.2 }, 2.6);
       };
 
       const countUp = (instant: boolean) => {
@@ -103,25 +100,7 @@ export default function Hero() {
         });
       }
 
-      // mouse parallax on the logo
-      const onMouse = (e: MouseEvent) => {
-        if (reduced || !logoRef.current) return;
-        const nx = e.clientX / window.innerWidth - 0.5;
-        const ny = e.clientY / window.innerHeight - 0.5;
-        gsap.to(logoRef.current, {
-          x: nx * 26,
-          y: ny * 18,
-          rotateY: nx * 6,
-          rotateX: -ny * 5,
-          transformPerspective: 900,
-          duration: 1.4,
-          ease: "power3.out",
-        });
-      };
-      window.addEventListener("mousemove", onMouse);
-
       return () => {
-        window.removeEventListener("mousemove", onMouse);
         window.removeEventListener("wi:reveal", play);
       };
     }, root);
@@ -135,31 +114,21 @@ export default function Hero() {
       id="top"
       className="surface-teal relative flex min-h-[120vh] flex-col overflow-hidden"
     >
-      {/* ambient glows */}
+      {/* background video (desktop / mobile source picked client-side) */}
+      <HeroVideo />
+      {/* teal tint — keeps the brand mood and text legibility over the video */}
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(28,147,183,0.16), transparent 65%), radial-gradient(ellipse 55% 45% at 72% 78%, rgba(226,194,111,0.10), transparent 70%), linear-gradient(180deg, #072530 0%, #0a2e38 48%, #0c3742 100%)",
+            "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(28,147,183,0.14), transparent 65%), radial-gradient(ellipse 55% 45% at 72% 78%, rgba(226,194,111,0.10), transparent 70%), linear-gradient(180deg, rgba(7,37,48,0.80) 0%, rgba(10,46,56,0.60) 42%, rgba(12,55,66,0.88) 100%)",
         }}
       />
-      <RibbonField className="absolute inset-0 h-full w-full opacity-90" />
+      <RibbonField className="absolute inset-0 h-full w-full opacity-40" />
 
       <div className="hero-center relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 flex-col items-center justify-center px-6 pt-40 pb-24 text-center">
-        <div ref={logoRef} className="hero-logo logo-sheen w-[300px] will-change-transform md:w-[420px]">
-          <Image
-            src="/logo-stacked.png"
-            alt="Welwitschia Investment Private Limited"
-            width={1200}
-            height={626}
-            sizes="(max-width: 768px) 300px, 420px"
-            priority
-            className="h-auto w-full drop-shadow-[0_30px_60px_rgba(200,166,90,0.18)]"
-          />
-        </div>
-
-        <h1 className="hero-h1 mt-14 font-display text-[clamp(2.6rem,6.5vw,5.4rem)] leading-[1.08] tracking-tight text-white-soft">
+        <h1 className="hero-h1 font-display text-[clamp(2.6rem,6.5vw,5.4rem)] leading-[1.08] tracking-tight text-white-soft">
           Rooted in Strength.
           <br />
           <span className="gold-line text-gold-2">Built for Growth.</span>
