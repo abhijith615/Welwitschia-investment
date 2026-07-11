@@ -41,7 +41,7 @@ export default function Nav() {
       ref={ref}
       className={`fixed inset-x-0 top-0 z-[70] transition-[background,border,backdrop-filter] duration-700 ${
         scrolled
-          ? "border-b border-white/[0.06] bg-[#05171f]/70 backdrop-blur-xl"
+          ? "border-b border-hair bg-[#f4ebe0]/85 backdrop-blur-xl"
           : "border-b border-transparent"
       }`}
     >
@@ -63,7 +63,11 @@ export default function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="nav-link text-[11px] uppercase tracking-[0.24em] text-ivory/70 transition-colors duration-300 hover:text-ivory"
+                className={`nav-link text-[11px] uppercase tracking-[0.24em] transition-colors duration-300 ${
+                  scrolled
+                    ? "text-[#163038]/75 hover:text-[#0e262c]"
+                    : "text-ivory/75 hover:text-ivory"
+                }`}
               >
                 {l.label}
               </a>
@@ -71,7 +75,12 @@ export default function Nav() {
           ))}
           <li>
             <Magnetic strength={0.25}>
-              <a href="#contact" className="btn-lux btn-outline !px-6 !py-3 !text-[10px]">
+              <a
+                href="#contact"
+                className={`btn-lux btn-outline !px-6 !py-3 !text-[10px] ${
+                  scrolled ? "" : "!text-[color:var(--color-ivory)]"
+                }`}
+              >
                 Request Consultation
               </a>
             </Magnetic>
@@ -96,8 +105,8 @@ export default function Nav() {
 
       {/* mobile menu */}
       <div
-        className={`overflow-hidden bg-[#05171f]/95 backdrop-blur-xl transition-[max-height] duration-700 ease-in-out lg:hidden ${
-          open ? "max-h-[420px] border-b border-white/[0.06]" : "max-h-0"
+        className={`overflow-hidden bg-[#f4ebe0]/97 backdrop-blur-xl transition-[max-height] duration-700 ease-in-out lg:hidden ${
+          open ? "max-h-[420px] border-b border-hair" : "max-h-0"
         }`}
       >
         <ul className="flex flex-col gap-1 px-8 py-6">
@@ -106,7 +115,7 @@ export default function Nav() {
               <a
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="block py-3 font-display text-xl text-ivory/85"
+                className="block py-3 font-display text-xl text-[#163038]/85"
               >
                 {l.label}
               </a>

@@ -103,7 +103,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section ref={rootRef} id="services" className="relative overflow-hidden py-36 md:py-48">
+    <section ref={rootRef} id="services" className="surface-cream relative overflow-hidden py-36 md:py-48">
       <div
         aria-hidden
         className="absolute inset-0"
@@ -136,7 +136,7 @@ export default function Services() {
           {SERVICES.map((s, i) => (
             <article
               key={s.title}
-              className="service-panel group relative overflow-hidden rounded-xl border border-white/[0.07] bg-gradient-to-b from-white/[0.05] to-white/[0.015] p-8 will-change-transform"
+              className="service-panel group glass relative overflow-hidden rounded-xl p-8 will-change-transform"
               style={{ minHeight: 300 }}
             >
               {/* tracked light */}

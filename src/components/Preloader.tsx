@@ -80,17 +80,17 @@ export default function Preloader() {
   return (
     <div ref={rootRef} className="fixed inset-0 z-[100]" aria-hidden>
       {/* split curtain panels */}
-      <div className="pre-panel-top absolute inset-x-0 top-0 h-1/2 bg-[#03141b]" />
-      <div className="pre-panel-bottom absolute inset-x-0 bottom-0 h-1/2 bg-[#03141b]" />
+      <div className="pre-panel-top absolute inset-x-0 top-0 h-1/2 bg-[#07242c]" />
+      <div className="pre-panel-bottom absolute inset-x-0 bottom-0 h-1/2 bg-[#07242c]" />
 
       <div className="pre-center absolute inset-0 flex flex-col items-center justify-center gap-8">
-        <div className="pre-mark logo-sheen relative w-[200px] md:w-[260px]">
+        <div className="pre-mark logo-sheen relative w-[210px] md:w-[280px]">
           <Image
             src="/logo-mark.png"
             alt=""
             width={800}
-            height={192}
-            sizes="260px"
+            height={251}
+            sizes="280px"
             priority
             className="h-auto w-full"
           />

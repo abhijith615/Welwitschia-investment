@@ -123,12 +123,17 @@ export default function Story() {
     <section
       ref={rootRef}
       id="story"
-      className="relative flex h-screen items-center overflow-hidden"
+      className="surface-teal relative flex h-screen items-center overflow-hidden"
       style={{
         background:
-          "radial-gradient(ellipse 80% 60% at 50% 100%, #0a2a36 0%, #04161e 60%, #03141b 100%)",
+          "radial-gradient(ellipse 80% 60% at 50% 100%, #0e3c49 0%, #082730 58%, #061f27 100%)",
       }}
     >
+      {/* soft transition down from the cream section above */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-32 bg-gradient-to-b from-[#ece0d1] to-transparent"
+      />
       <div className="mx-auto grid w-full max-w-[1440px] items-center gap-10 px-6 md:px-12 lg:grid-cols-[1fr_1.2fr]">
         {/* chapters */}
         <div className="relative z-10 order-2 h-[290px] lg:order-1 lg:h-[360px]">

@@ -55,7 +55,7 @@ export default function RootLayout({
       lang="en"
       className={`${bodoni.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col grain vignette">{children}</body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

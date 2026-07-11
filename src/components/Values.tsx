@@ -56,9 +56,9 @@ export default function Values() {
       // background hue drifts subtly as you pass through
       gsap.fromTo(
         root,
-        { backgroundColor: "#05171f" },
+        { backgroundColor: "#f4ebe0" },
         {
-          backgroundColor: "#0a2836",
+          backgroundColor: "#ece0d1",
           ease: "none",
           scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: 1.5 },
         }
@@ -68,7 +68,7 @@ export default function Values() {
   }, []);
 
   return (
-    <section ref={rootRef} id="values" className="relative overflow-hidden py-36 md:py-44">
+    <section ref={rootRef} id="values" className="surface-cream relative overflow-hidden py-36 md:py-44">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-24 text-center">
           <p className="eyebrow justify-center" data-reveal="fade">

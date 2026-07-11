@@ -49,10 +49,15 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={rootRef} id="about" className="relative overflow-hidden py-36 md:py-48">
+    <section ref={rootRef} id="about" className="surface-cream relative overflow-hidden py-36 md:py-48">
+      {/* soft transition down from the teal hero above */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#0b3340] to-transparent"
+      />
       {/* contour lines */}
       <svg
-        className="about-contours pointer-events-none absolute -right-40 top-0 h-[130%] w-[900px] opacity-[0.05]"
+        className="about-contours pointer-events-none absolute -right-40 top-0 h-[130%] w-[900px] opacity-[0.08]"
         viewBox="0 0 900 1200"
         fill="none"
         aria-hidden

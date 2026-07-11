@@ -38,15 +38,15 @@ function DottedMap() {
   return (
     <svg viewBox="0 0 100 100" className="h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden>
       {dots.map((d, i) => (
-        <circle key={i} cx={d.x} cy={d.y} r={d.r} fill="#5ccde8" opacity={d.o * 0.5} />
+        <circle key={i} cx={d.x} cy={d.y} r={d.r} fill="#1783a0" opacity={d.o * 0.85} />
       ))}
       {/* office beacon */}
-      <circle cx="68" cy="58" r="0.8" fill="#e2c26f" />
-      <circle cx="68" cy="58" r="0.8" fill="none" stroke="#e2c26f" strokeWidth="0.25" opacity="0.8">
+      <circle cx="68" cy="58" r="0.9" fill="#b3852f" />
+      <circle cx="68" cy="58" r="0.9" fill="none" stroke="#b3852f" strokeWidth="0.28" opacity="0.85">
         <animate attributeName="r" values="0.8;4" dur="2.8s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.8;0" dur="2.8s" repeatCount="indefinite" />
       </circle>
-      <circle cx="68" cy="58" r="0.8" fill="none" stroke="#e2c26f" strokeWidth="0.2" opacity="0.6">
+      <circle cx="68" cy="58" r="0.9" fill="none" stroke="#b3852f" strokeWidth="0.22" opacity="0.6">
         <animate attributeName="r" values="0.8;4" dur="2.8s" begin="1.4s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.6;0" dur="2.8s" begin="1.4s" repeatCount="indefinite" />
       </circle>
@@ -65,7 +65,7 @@ export default function Contact() {
   };
 
   return (
-    <section ref={rootRef} id="contact" className="relative overflow-hidden py-36 md:py-48">
+    <section ref={rootRef} id="contact" className="surface-cream relative overflow-hidden py-36 md:py-48">
       <div
         aria-hidden
         className="absolute inset-0"
@@ -96,7 +96,7 @@ export default function Contact() {
           style={{ borderColor: "rgba(200,166,90,0.22)" }}
         >
           {/* left — the office */}
-          <div className="relative min-h-[320px] border-b border-white/[0.07] md:border-b-0 md:border-r">
+          <div className="relative min-h-[320px] border-b border-hair md:border-b-0 md:border-r">
             <div className="absolute inset-0 opacity-80">
               <DottedMap />
             </div>
@@ -176,7 +176,7 @@ export default function Contact() {
                       "Strategic Partnerships",
                       "Other",
                     ].map((o) => (
-                      <option key={o} value={o} className="bg-navy text-ivory">
+                      <option key={o} value={o} className="bg-[#f4ebe0] text-[#163038]">
                         {o}
                       </option>
                     ))}

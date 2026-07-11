@@ -67,10 +67,11 @@ function Motif({ kind }: { kind: MotifKind }) {
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };
-  const GOLD = "#e2c26f";
-  const GOLD_D = "#c8a65a";
-  const AQUA = "#5ccde8";
-  const AQUA_D = "#1c93b7";
+  /* deeper tones so the line-art reads on the cream surface */
+  const GOLD = "#bd8836";
+  const GOLD_D = "#a9853f";
+  const AQUA = "#1783a0";
+  const AQUA_D = "#0f6178";
 
   switch (kind) {
     case "growth":
@@ -190,7 +191,7 @@ export default function WhyUs() {
   }, [active]);
 
   return (
-    <section ref={rootRef} id="why" className="relative">
+    <section ref={rootRef} id="why" className="surface-cream relative">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -241,7 +242,7 @@ export default function WhyUs() {
           <div className="mx-auto grid w-full max-w-[1440px] grid-cols-[0.85fr_1.15fr] items-center gap-20 px-12">
             {/* left — interactive index */}
             <div className="relative pl-12">
-              <div className="absolute left-0 top-1 bottom-1 w-px bg-white/[0.08]" />
+              <div className="absolute left-0 top-1 bottom-1 w-px bg-[color:var(--hair)]" />
               <div
                 ref={railRef}
                 className="absolute left-0 top-1 w-px origin-top bg-gradient-to-b from-gold-2 via-aqua to-transparent"
@@ -295,7 +296,7 @@ export default function WhyUs() {
                       : "pointer-events-none opacity-0 blur-[6px]"
                   }`}
                 >
-                  <span className="wm-ghost pointer-events-none absolute -top-24 right-0 font-display text-[13rem] leading-none text-white/[0.04]">
+                  <span className="wm-ghost pointer-events-none absolute -top-24 right-0 font-display text-[13rem] leading-none text-[#173a44]/[0.07]">
                     0{i + 1}
                   </span>
                   <div className="relative flex items-start gap-10">
@@ -327,7 +328,7 @@ export default function WhyUs() {
             data-reveal="up"
             className="glass relative overflow-hidden rounded-2xl p-8"
           >
-            <span className="pointer-events-none absolute -top-6 right-2 font-display text-[6rem] leading-none text-white/[0.04]">
+            <span className="pointer-events-none absolute -top-6 right-2 font-display text-[6rem] leading-none text-[#173a44]/[0.07]">
               0{i + 1}
             </span>
             <div className="relative flex items-start gap-6">

@@ -133,7 +133,7 @@ export default function Hero() {
     <section
       ref={rootRef}
       id="top"
-      className="relative flex min-h-[120vh] flex-col overflow-hidden"
+      className="surface-teal relative flex min-h-[120vh] flex-col overflow-hidden"
     >
       {/* ambient glows */}
       <div
@@ -141,7 +141,7 @@ export default function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(28,147,183,0.12), transparent 65%), radial-gradient(ellipse 55% 45% at 72% 78%, rgba(226,194,111,0.08), transparent 70%), linear-gradient(180deg, #04161e 0%, #05171f 45%, #071f29 100%)",
+            "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(28,147,183,0.16), transparent 65%), radial-gradient(ellipse 55% 45% at 72% 78%, rgba(226,194,111,0.10), transparent 70%), linear-gradient(180deg, #072530 0%, #0a2e38 48%, #0c3742 100%)",
         }}
       />
       <RibbonField className="absolute inset-0 h-full w-full opacity-90" />

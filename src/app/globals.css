@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* Strictly two brand hues: aqua-blue and gold.
-     The canvas is a deep midnight-aqua; every neutral is cooled toward it. */
-  --color-navy: #05171f;
-  --color-navy-2: #072028;
-  --color-navy-3: #0a2c38;
+  /* Palette sampled 100% from the logo: warm cream paper (#f1e7dd),
+     brushed gold, and aqua/teal type. Two surfaces — cream & deep teal. */
+  --color-cream: #f4ebe0;
+  --color-cream-2: #efe3d5;
+  --color-cream-3: #e7d9c8;
+  --color-teal: #0a2e38;
+  --color-teal-2: #0d3a47;
+  --color-teal-3: #07242c;
   --color-aqua: #1c93b7;
   --color-aqua-soft: #5ccde8;
-  --color-aqua-deep: #0d5f78;
+  --color-aqua-ink: #15788f;
   --color-gold: #c8a65a;
   --color-gold-2: #e2c26f;
-  --color-gold-bright: #f2d98f;
-  --color-ivory: #dceef3;
-  --color-white-soft: #f3fbfd;
-  --color-graphite: #0c2530;
+  --color-gold-deep: #8f6a2c;
+  --color-ink: #163038;
+  --color-ivory: #e9f2f1;
+  --color-white-soft: #f6fbfa;
 
   --font-display: var(--font-bodoni), "Bodoni Moda", serif;
   --font-serif-alt: var(--font-cormorant), "Cormorant Garamond", serif;
@@ -22,8 +25,9 @@
 }
 
 :root {
-  --glass: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  /* defaults tuned for the DARK teal surface */
+  --hair: rgba(255, 255, 255, 0.09);
+  --hair-strong: rgba(255, 255, 255, 0.16);
   --gold-hairline: linear-gradient(
     90deg,
     transparent,
@@ -33,7 +37,7 @@
 }
 
 html {
-  background: var(--color-navy);
+  background: var(--color-teal);
 }
 
 html.lenis,
@@ -46,17 +50,49 @@ html.lenis body {
 }
 
 body {
-  background: var(--color-navy);
-  color: var(--color-ivory);
+  background: var(--color-cream);
+  color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
 }
 
+/* ---------- surfaces ----------
+   .surface-teal  : dark cinematic sections (Hero, Story, Footer, Preloader)
+   .surface-cream : light editorial sections; light-text utility tokens are
+                    re-pointed to dark ink so existing classes flip automatically */
+.surface-teal {
+  background: var(--color-teal);
+  color: var(--color-ivory);
+}
+
+.surface-cream {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  --color-white-soft: #10272d; /* headings */
+  --color-ivory: #244a52; /* body / muted (opacity variants read as soft greys) */
+  --color-gold: #927231; /* deep gold keeps contrast on cream */
+  --color-gold-2: #a17a30;
+  --color-aqua: #15788f;
+  --color-aqua-soft: #1c93b7;
+  --hair: rgba(20, 48, 55, 0.14);
+  --hair-strong: rgba(20, 48, 55, 0.22);
+  --gold-hairline: linear-gradient(
+    90deg,
+    transparent,
+    rgba(146, 114, 49, 0.55),
+    transparent
+  );
+}
+
+.border-hair {
+  border-color: var(--hair);
+}
+
 ::selection {
-  background: rgba(200, 166, 90, 0.32);
-  color: var(--color-white-soft);
+  background: rgba(200, 166, 90, 0.34);
+  color: #0a141d;
 }
 
 /* ---------- scrollbar ---------- */
@@ -64,52 +100,19 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #04141b;
+  background: #e7dccb;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #1c3a45, #123039);
+  background: linear-gradient(180deg, #c8a65a, #a9853f);
   border-radius: 8px;
-  border: 2px solid #04141b;
+  border: 2px solid #e7dccb;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #235061;
+  background: linear-gradient(180deg, #d8b45f, #b8933f);
 }
 
-/* ---------- film grain ---------- */
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: -100%;
-  z-index: 90;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain-shift 9s steps(10) infinite;
-}
-@keyframes grain-shift {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-3%, -6%); }
-  30% { transform: translate(4%, 2%); }
-  50% { transform: translate(-4%, 7%); }
-  70% { transform: translate(6%, -3%); }
-  90% { transform: translate(-2%, 4%); }
-}
-
-/* ---------- vignette ---------- */
-.vignette::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 89;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse 120% 90% at 50% 45%,
-    transparent 55%,
-    rgba(3, 8, 12, 0.5) 100%
-  );
-}
-
-/* ---------- glass ---------- */
+/* ---------- glass ----------
+   default = frosted on dark; cream override = frosted white with soft shadow */
 .glass {
   background: linear-gradient(
     135deg,
@@ -119,6 +122,15 @@ body {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.09);
+}
+.surface-cream .glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.72),
+    rgba(252, 248, 240, 0.42)
+  );
+  border: 1px solid rgba(20, 48, 55, 0.1);
+  box-shadow: 0 30px 70px -34px rgba(20, 48, 55, 0.22);
 }
 
 /* ---------- typographic helpers ---------- */
@@ -183,7 +195,6 @@ body {
   white-space: nowrap;
 }
 .btn-lux::after {
-  /* light sweep */
   content: "";
   position: absolute;
   inset: 0;
@@ -212,13 +223,16 @@ body {
     0 22px 54px -12px rgba(200, 166, 90, 0.6);
 }
 .btn-outline {
+  color: var(--color-ink);
+  border: 1px solid rgba(200, 166, 90, 0.6);
+  background: rgba(200, 166, 90, 0.06);
+}
+.surface-teal .btn-outline {
   color: var(--color-ivory);
-  border: 1px solid rgba(200, 166, 90, 0.55);
-  background: rgba(200, 166, 90, 0.05);
 }
 .btn-outline:hover {
-  border-color: rgba(226, 194, 111, 0.9);
-  background: rgba(200, 166, 90, 0.1);
+  border-color: rgba(200, 166, 90, 0.95);
+  background: rgba(200, 166, 90, 0.12);
 }
 
 /* ---------- inputs ---------- */
@@ -226,7 +240,7 @@ body {
   width: 100%;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid var(--hair-strong);
   padding: 0.9rem 0 0.7rem;
   font-size: 0.95rem;
   color: var(--color-white-soft);
@@ -234,13 +248,12 @@ body {
   transition: border-color 0.4s ease;
 }
 .input-lux::placeholder {
-  color: rgba(248, 245, 238, 0.32);
+  color: color-mix(in oklab, var(--color-ivory) 42%, transparent);
 }
 .input-lux:focus {
-  border-color: rgba(200, 166, 90, 0.8);
+  border-color: rgba(200, 166, 90, 0.85);
 }
 
-/* underline grows on focus */
 .field {
   position: relative;
 }
@@ -251,7 +264,7 @@ body {
   bottom: 0;
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, #c8a65a, #5ccde8);
+  background: linear-gradient(90deg, #c8a65a, #1c93b7);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
@@ -269,7 +282,7 @@ body {
   position: absolute;
   width: 14px;
   height: 14px;
-  border-color: rgba(200, 166, 90, 0.65);
+  border-color: rgba(200, 166, 90, 0.75);
   border-style: solid;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -351,7 +364,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .grain::after,
   .logo-sheen::after,
   .text-gold-sheen {
     animation: none !important;

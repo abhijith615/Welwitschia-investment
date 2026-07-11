@@ -82,7 +82,7 @@ async function navyPreview(buf, name) {
   // monogram mark = top region of the stacked logo
   const meta = await sharp(stackedBuf).metadata();
   const mark = await sharp(stackedBuf)
-    .extract({ left: 0, top: 0, width: meta.width, height: Math.round(meta.height * 0.46) })
+    .extract({ left: 0, top: 0, width: meta.width, height: Math.round(meta.height * 0.6) })
     .trim({ threshold: 6 })
     .resize({ width: 800 })
     .png({ compressionLevel: 9 })

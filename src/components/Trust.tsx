@@ -40,7 +40,12 @@ export default function Trust() {
   }, []);
 
   return (
-    <section ref={rootRef} id="commitment" className="relative overflow-hidden py-36 md:py-44">
+    <section ref={rootRef} id="commitment" className="surface-cream relative overflow-hidden py-36 md:py-44">
+      {/* soft transition down from the teal Story above */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#0c3541] to-transparent"
+      />
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         <div className="text-center">
           <p className="eyebrow justify-center" data-reveal="fade">
@@ -68,7 +73,7 @@ export default function Trust() {
           {FIGURES.map((f, i) => (
             <div
               key={f.label}
-              className={`px-6 text-center ${i > 0 ? "md:border-l md:border-white/[0.07]" : ""}`}
+              className={`px-6 text-center ${i > 0 ? "md:border-l md:border-hair" : ""}`}
             >
               <p className="font-display text-[clamp(2.6rem,4.5vw,4rem)] leading-none text-gold-2">
                 <span data-count={f.value}>0</span>

@@ -18,14 +18,19 @@ export default function Footer() {
   useReveal(rootRef);
 
   return (
-    <footer ref={rootRef} className="relative overflow-hidden pt-32 pb-12">
+    <footer ref={rootRef} className="surface-teal relative overflow-hidden pt-32 pb-12">
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, transparent 0%, #04161e 40%), radial-gradient(ellipse 60% 45% at 50% 100%, rgba(226,194,111,0.07), transparent 70%)",
+            "linear-gradient(180deg, transparent 0%, #08272f 38%), radial-gradient(ellipse 60% 45% at 50% 100%, rgba(226,194,111,0.09), transparent 70%)",
         }}
+      />
+      {/* soft transition up from the cream Contact above */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#f4ebe0] to-transparent"
       />
       <div className="relative mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="flex flex-col items-center">

@@ -73,7 +73,7 @@ export default function Products() {
   }, []);
 
   return (
-    <section ref={rootRef} id="products" className="relative overflow-hidden py-36 md:py-48">
+    <section ref={rootRef} id="products" className="surface-cream relative overflow-hidden py-36 md:py-48">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-24 text-center">
           <p className="eyebrow justify-center" data-reveal="fade">
@@ -99,7 +99,7 @@ export default function Products() {
           {PRODUCTS.map((p) => (
             <article
               key={p.title}
-              className="product-card corner-ticks group relative overflow-hidden rounded-lg border border-white/[0.08] bg-[#082330]/80 p-8 pt-10 transition-all duration-700 hover:-translate-y-2 hover:border-gold/30 hover:shadow-[0_30px_70px_-20px_rgba(200,166,90,0.22)]"
+              className="product-card corner-ticks group relative overflow-hidden rounded-lg border border-hair bg-[#fdfaf4] p-8 pt-10 shadow-[0_18px_50px_-30px_rgba(20,48,55,0.25)] transition-all duration-700 hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_36px_80px_-26px_rgba(200,166,90,0.3)]"
               style={{ minHeight: 320 }}
             >
               <span className="tick" aria-hidden />
