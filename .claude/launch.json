@@ -4,7 +4,7 @@
     {
       "name": "welwitschia-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "welwitschia-investment"],
+      "runtimeArgs": ["run", "dev"],
       "port": 3000
     }
   ]

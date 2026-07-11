@@ -7,7 +7,7 @@ const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
-const SRC = path.resolve(__dirname, "..", "..");
+const SRC = path.resolve(__dirname, "..", "design-source");
 const OUT = path.resolve(__dirname, "..", "public");
 
 function extractPngs(svgText) {
