@@ -185,7 +185,8 @@ export default function WhyUs() {
       gsap.fromTo(panel.querySelector(".wm-kicker"), { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" });
       gsap.fromTo(panel.querySelector(".wm-title"), { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.08 });
       gsap.fromTo(panel.querySelector(".wm-body"), { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.16 });
-      gsap.fromTo(panel.querySelector(".wm-ghost"), { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" });
+      // opacity-only so the CSS centering transform (-translate-y-1/2) survives
+      gsap.fromTo(panel.querySelector(".wm-ghost"), { opacity: 0 }, { opacity: 1, duration: 1.1, ease: "power2.out" });
     }, panel);
     return () => ctx.revert();
   }, [active]);
@@ -301,7 +302,7 @@ export default function WhyUs() {
                       : "pointer-events-none opacity-0 blur-[6px]"
                   }`}
                 >
-                  <span className="wm-ghost pointer-events-none absolute -top-24 right-0 font-display text-[13rem] leading-none text-[#173a44]/[0.07]">
+                  <span className="wm-ghost pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 font-display text-[12rem] leading-none text-[#173a44]/[0.07]">
                     0{i + 1}
                   </span>
                   <div className="relative flex items-start gap-10">
@@ -333,7 +334,7 @@ export default function WhyUs() {
             data-reveal="up"
             className="glass relative overflow-hidden rounded-2xl p-8"
           >
-            <span className="pointer-events-none absolute -top-6 right-2 font-display text-[6rem] leading-none text-[#173a44]/[0.07]">
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-display text-[6rem] leading-none text-[#173a44]/[0.07]">
               0{i + 1}
             </span>
             <div className="relative flex items-start gap-6">
