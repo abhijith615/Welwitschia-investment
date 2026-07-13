@@ -90,7 +90,7 @@ export default function Values() {
             Our Values
           </p>
           <h2
-            className="mx-auto mt-9 max-w-3xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
+            className="mx-auto mt-9 max-w-3xl font-heading text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
             data-reveal="lines"
           >
             The principles that govern every decision we make.
@@ -117,11 +117,8 @@ export default function Values() {
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-xl border border-gold/0 transition-colors duration-700 group-hover:border-gold/35"
               />
-              <span className="font-display text-lg tracking-[0.2em] text-gold/60 transition-colors duration-500 group-hover:text-gold-2">
-                {v.n}
-              </span>
               <div>
-                <h3 className="font-display text-[26px] text-ivory lg:[writing-mode:vertical-rl]">
+                <h3 className="font-heading text-[26px] text-ivory lg:[writing-mode:vertical-rl]">
                   {v.title}
                 </h3>
               </div>

@@ -35,8 +35,10 @@ export default function Hero() {
       // chars animate in solid gold; once whole again, the sheen takes over
       const restore = () => {
         split.revert();
-        // revert() swaps the DOM back in — the old span reference is detached
-        h1.querySelector(".gold-line")?.classList.add("text-gold-sheen");
+        // revert() swaps the DOM back in — the old span references are detached
+        h1.querySelectorAll(".gold-line").forEach((el) =>
+          el.classList.add("text-gold-sheen")
+        );
       };
 
       const play = () => {
@@ -128,16 +130,15 @@ export default function Hero() {
       <RibbonField className="absolute inset-0 h-full w-full opacity-40" />
 
       <div className="hero-center relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 flex-col items-center justify-center px-6 pt-40 pb-24 text-center">
-        <h1 className="hero-h1 font-display text-[clamp(2.6rem,6.5vw,5.4rem)] leading-[1.08] tracking-tight text-white-soft">
-          Rooted in Strength.
+        <h1 className="hero-h1 font-display text-[clamp(2.6rem,6.5vw,5.4rem)] leading-[1.08] tracking-tight text-gold-2">
+          <span className="gold-line">Rooted in Strength.</span>
           <br />
-          <span className="gold-line text-gold-2">Built for Growth.</span>
+          <span className="gold-line">Built for Growth.</span>
         </h1>
 
-        <div className="mt-9 flex flex-col items-center gap-1.5 font-serif-alt text-[clamp(1.05rem,2vw,1.45rem)] italic text-ivory/70">
-          <p className="hero-tag-line">Strong Roots. Strong Returns.</p>
-          <p className="hero-tag-line">Growing Wealth, Naturally.</p>
-        </div>
+        <p className="hero-tag-line mt-9 font-serif-alt text-[clamp(0.95rem,1.9vw,1.45rem)] italic text-ivory/75">
+          Strong Roots. Strong Returns. Growing Wealth, Naturally.
+        </p>
 
         <div className="mt-12 flex flex-col items-center gap-5 sm:flex-row">
           <Magnetic className="hero-cta">

@@ -79,7 +79,7 @@ export default function About() {
             The House
           </p>
           <h2
-            className="mt-10 font-display text-[clamp(2.2rem,4.4vw,3.9rem)] leading-[1.14] text-white-soft"
+            className="mt-10 font-heading text-[clamp(2.2rem,4.4vw,3.9rem)] leading-[1.14] text-white-soft"
             data-reveal="lines"
           >
             Sustainable wealth is built through resilience, vision, and
@@ -123,10 +123,7 @@ export default function About() {
             />
             <div className="space-y-14">
               <div>
-                <h3 className="flex items-baseline gap-4 font-display text-2xl text-gold-2">
-                  <span className="text-sm tracking-[0.3em] text-ivory/40">01</span>
-                  Our Vision
-                </h3>
+                <h3 className="font-heading text-2xl text-gold-2">Our Vision</h3>
                 <p className="mt-5 text-[14.5px] leading-[1.9] text-ivory/65">
                   To be a trusted investment partner recognized for creating
                   sustainable value, fostering innovation, and building wealth
@@ -135,10 +132,7 @@ export default function About() {
               </div>
               <div className="hairline" />
               <div>
-                <h3 className="flex items-baseline gap-4 font-display text-2xl text-gold-2">
-                  <span className="text-sm tracking-[0.3em] text-ivory/40">02</span>
-                  Our Mission
-                </h3>
+                <h3 className="font-heading text-2xl text-gold-2">Our Mission</h3>
                 <p className="mt-5 text-[14.5px] leading-[1.9] text-ivory/65">
                   To provide strategic investment solutions that deliver
                   long&#8209;term growth while maintaining integrity,
@@ -147,10 +141,7 @@ export default function About() {
               </div>
               <div className="hairline" />
               <div>
-                <h3 className="flex items-baseline gap-4 font-display text-2xl text-gold-2">
-                  <span className="text-sm tracking-[0.3em] text-ivory/40">03</span>
-                  Our Promise
-                </h3>
+                <h3 className="font-heading text-2xl text-gold-2">Our Promise</h3>
                 <p className="mt-5 text-[14.5px] leading-[1.9] text-ivory/65">
                   Enduring relationships built on trust, transparency, and
                   consistent performance—tailored investment solutions that

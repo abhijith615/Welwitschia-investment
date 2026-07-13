@@ -80,7 +80,7 @@ export default function Contact() {
             Private Enquiries
           </p>
           <h2
-            className="mx-auto mt-9 max-w-2xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
+            className="mx-auto mt-9 max-w-2xl font-heading text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
             data-reveal="lines"
           >
             Begin a conversation.
@@ -104,7 +104,7 @@ export default function Contact() {
               <p className="text-[10.5px] uppercase tracking-[0.35em] text-gold">
                 The Private Office
               </p>
-              <h3 className="mt-4 font-display text-2xl text-ivory">
+              <h3 className="mt-4 font-heading text-2xl text-ivory">
                 Welwitschia Investment
                 <br />
                 Private Limited
@@ -128,7 +128,7 @@ export default function Contact() {
             {sent ? (
               <div className="flex h-full min-h-[380px] flex-col items-center justify-center text-center">
                 <div className="hairline w-24" />
-                <h3 className="mt-8 font-display text-3xl text-gold-2">Thank you.</h3>
+                <h3 className="mt-8 font-heading text-3xl text-gold-2">Thank you.</h3>
                 <p className="mt-5 max-w-[380px] text-[14px] leading-[1.9] text-ivory/60">
                   Your enquiry has been received. A member of our private
                   office will be in touch shortly.

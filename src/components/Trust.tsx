@@ -47,7 +47,7 @@ export default function Trust() {
             Our Commitment
           </p>
           <h2
-            className="mx-auto mt-9 max-w-3xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.18] text-white-soft"
+            className="mx-auto mt-9 max-w-3xl font-heading text-[clamp(2rem,4vw,3.4rem)] leading-[1.18] text-white-soft"
             data-reveal="lines"
           >
             Rigorous research. Disciplined risk. Unconditional transparency.

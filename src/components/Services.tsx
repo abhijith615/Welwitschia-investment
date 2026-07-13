@@ -133,7 +133,7 @@ export default function Services() {
               Our Services
             </p>
             <h2
-              className="mt-9 font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
+              className="mt-9 font-heading text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
               data-reveal="lines"
             >
               Strategic solutions, quietly executed.
@@ -147,7 +147,7 @@ export default function Services() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map((s, i) => (
+          {SERVICES.map((s) => (
             <article
               key={s.title}
               className="service-panel on-dark group relative min-h-[380px] overflow-hidden rounded-xl border border-white/[0.08] will-change-transform"
@@ -183,12 +183,9 @@ export default function Services() {
                 aria-hidden
                 className="pointer-events-none absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gradient-to-r from-gold-2/80 via-gold/60 to-transparent transition-transform duration-[900ms] ease-out group-hover:scale-x-100"
               />
-              <span className="absolute left-7 top-6 font-body text-[11px] tracking-[0.35em] text-gold-2">
-                {String(i + 1).padStart(2, "0")}
-              </span>
               <div className="absolute inset-x-0 bottom-0 p-7">
                 <div className="mb-4 h-px w-9 bg-gradient-to-r from-gold-2 to-transparent transition-all duration-700 group-hover:w-16" />
-                <h3 className="font-display text-[19px] leading-snug text-white-soft">
+                <h3 className="font-heading text-[19px] leading-snug text-white-soft">
                   {s.title}
                 </h3>
                 <p className="mt-2.5 text-[12.5px] leading-[1.7] text-ivory/75">

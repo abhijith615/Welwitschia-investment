@@ -105,7 +105,7 @@ export default function Products() {
             Investment Products
           </p>
           <h2
-            className="mx-auto mt-9 max-w-3xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
+            className="mx-auto mt-9 max-w-3xl font-heading text-[clamp(2rem,4vw,3.4rem)] leading-[1.15] text-white-soft"
             data-reveal="lines"
           >
             A private collection of opportunities.
@@ -133,11 +133,8 @@ export default function Products() {
                 aria-hidden
                 className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold-2/[0.07] to-transparent transition-transform duration-[1200ms] ease-out group-hover:translate-x-full"
               />
-              <p className="font-serif-alt text-sm italic tracking-wide text-gold/70">
-                {p.roman}
-              </p>
-              <div className="mt-14 mb-6 hairline opacity-60" />
-              <h3 className="font-display text-[22px] leading-snug text-ivory transition-colors duration-500 group-hover:text-gold-2">
+              <div className="mb-6 hairline w-12 opacity-70" />
+              <h3 className="font-heading text-[22px] leading-snug text-ivory transition-colors duration-500 group-hover:text-gold-2">
                 {p.title}
               </h3>
               <p className="mt-4 text-[13px] leading-[1.85] text-ivory/50 opacity-90 transition-opacity duration-500 group-hover:opacity-100">

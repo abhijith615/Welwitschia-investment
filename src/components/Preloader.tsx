@@ -96,7 +96,7 @@ export default function Preloader() {
           />
         </div>
         <div className="pre-line hairline w-56 origin-center" />
-        <p className="pre-word text-[10px] uppercase text-ivory/70">
+        <p className="pre-word text-[10px] uppercase text-aqua-soft">
           Welwitschia Investment
         </p>
       </div>

@@ -1,10 +1,19 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Cormorant_Garamond, Inter } from "next/font/google";
+import { Bodoni_Moda, Cormorant_Garamond, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
 const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// distinct premium serif for section headings (paired against Bodoni hero)
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -53,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bodoni.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
+      className={`${bodoni.variable} ${cormorant.variable} ${fraunces.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

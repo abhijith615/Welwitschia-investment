@@ -185,8 +185,6 @@ export default function WhyUs() {
       gsap.fromTo(panel.querySelector(".wm-kicker"), { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" });
       gsap.fromTo(panel.querySelector(".wm-title"), { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.08 });
       gsap.fromTo(panel.querySelector(".wm-body"), { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.16 });
-      // opacity-only so the CSS centering transform (-translate-y-1/2) survives
-      gsap.fromTo(panel.querySelector(".wm-ghost"), { opacity: 0 }, { opacity: 1, duration: 1.1, ease: "power2.out" });
     }, panel);
     return () => ctx.revert();
   }, [active]);
@@ -215,7 +213,7 @@ export default function WhyUs() {
               Why Welwitschia
             </p>
             <h2
-              className="mt-9 font-display text-[clamp(2rem,4.2vw,3.6rem)] leading-[1.12] text-white-soft"
+              className="mt-9 font-heading text-[clamp(2rem,4.2vw,3.6rem)] leading-[1.12] text-white-soft"
               data-reveal="lines"
             >
               The standard behind
@@ -261,21 +259,19 @@ export default function WhyUs() {
                     <li key={i}>
                       <a
                         href={`#why-${i}`}
-                        className={`group flex items-baseline gap-5 transition-all duration-500 ${
+                        className={`group flex items-center gap-4 transition-all duration-500 ${
                           on ? "translate-x-1" : "opacity-45 hover:opacity-80"
                         }`}
                       >
                         <span
-                          className={`font-body text-[11px] tracking-[0.3em] transition-colors duration-500 ${
-                            on ? "text-gold-2" : "text-ivory/50"
+                          className={`h-px origin-left bg-gold-2 transition-all duration-500 ${
+                            on ? "w-8 opacity-100" : "w-0 opacity-0"
                           }`}
-                        >
-                          0{i + 1}
-                        </span>
+                        />
                         <span
-                          className={`font-display leading-tight transition-all duration-500 ${
+                          className={`font-heading leading-tight transition-all duration-500 ${
                             on
-                              ? "text-[1.55rem] text-white-soft"
+                              ? "text-[1.6rem] text-white-soft"
                               : "text-[1.35rem] text-ivory/70"
                           }`}
                         >
@@ -302,16 +298,13 @@ export default function WhyUs() {
                       : "pointer-events-none opacity-0 blur-[6px]"
                   }`}
                 >
-                  <span className="wm-ghost pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 font-display text-[12rem] leading-none text-[#173a44]/[0.07]">
-                    0{i + 1}
-                  </span>
                   <div className="relative flex items-start gap-10">
                     <div className="h-[128px] w-[128px] shrink-0">
                       <Motif kind={it.motif} />
                     </div>
                     <div className="pt-2">
                       <p className="wm-kicker eyebrow">{it.kicker}</p>
-                      <h3 className="wm-title mt-6 font-display text-[clamp(2rem,2.8vw,2.9rem)] leading-[1.1] text-white-soft">
+                      <h3 className="wm-title mt-6 font-heading text-[clamp(2rem,2.8vw,2.9rem)] leading-[1.1] text-white-soft">
                         {it.title}
                       </h3>
                       <p className="wm-body mt-6 max-w-[460px] text-[15px] leading-[1.95] text-ivory/62">
@@ -334,16 +327,13 @@ export default function WhyUs() {
             data-reveal="up"
             className="glass relative overflow-hidden rounded-2xl p-8"
           >
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-display text-[6rem] leading-none text-[#173a44]/[0.07]">
-              0{i + 1}
-            </span>
             <div className="relative flex items-start gap-6">
               <div className="h-[76px] w-[76px] shrink-0">
                 <Motif kind={it.motif} />
               </div>
               <div>
                 <p className="eyebrow">{it.kicker}</p>
-                <h3 className="mt-4 font-display text-[1.7rem] leading-tight text-white-soft">
+                <h3 className="mt-4 font-heading text-[1.7rem] leading-tight text-white-soft">
                   {it.title}
                 </h3>
               </div>

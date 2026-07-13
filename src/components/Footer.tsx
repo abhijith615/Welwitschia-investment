@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { useReveal } from "@/lib/useReveal";
+import CareersModal from "@/components/CareersModal";
 
 const NAV = [
   { href: "#about", label: "About" },
@@ -14,6 +15,7 @@ const NAV = [
 
 export default function Footer() {
   const rootRef = useRef<HTMLElement>(null);
+  const [careersOpen, setCareersOpen] = useState(false);
   useReveal(rootRef);
 
   return (
@@ -63,6 +65,14 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={() => setCareersOpen(true)}
+                  className="nav-link text-[10.5px] uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
+                >
+                  Careers
+                </button>
+              </li>
             </ul>
           </nav>
           <ul className="flex gap-7">
@@ -98,6 +108,8 @@ export default function Footer() {
           </p>
         </div>
       </div>
+
+      <CareersModal open={careersOpen} onClose={() => setCareersOpen(false)} />
     </footer>
   );
 }
