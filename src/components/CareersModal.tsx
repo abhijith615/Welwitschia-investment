@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Magnetic from "@/components/Magnetic";
 
+const HR_TO = "hr@welwitschiainvestment.com";
+// Web3Forms delivers submissions to the inbox registered to this (public) key.
+const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_CAREERS_WEB3FORMS_KEY ||
+  "0f7c9fce-6d2e-4235-aa73-4e1344f16cfa";
+
 const ROLES = [
   "Investment Analyst",
   "Portfolio Manager",
@@ -24,6 +30,8 @@ export default function CareersModal({
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   // mount/unmount with an enter+exit transition window
@@ -44,6 +52,7 @@ export default function CareersModal({
     const t = setTimeout(() => {
       setMounted(false);
       setSent(false);
+      setError(false);
     }, 400);
     return () => {
       cancelAnimationFrame(raf);
@@ -114,7 +123,7 @@ export default function CareersModal({
             <div className="flex min-h-[320px] flex-col items-center justify-center text-center">
               <div className="hairline w-24" />
               <h3 className="mt-8 font-heading text-3xl text-gold-deep">Thank you.</h3>
-              <p className="mt-5 max-w-[420px] text-[14px] leading-[1.9] text-ivory/70">
+              <p className="mt-5 max-w-[440px] text-[14px] leading-[1.9] text-ivory/70">
                 Your details have reached our People &amp; Talent office. If your
                 profile aligns with an opportunity, a member of our team will be
                 in touch in confidence.
@@ -140,12 +149,52 @@ export default function CareersModal({
               </p>
 
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  setSent(true);
+                  setError(false);
+                  setSubmitting(true);
+
+                  const form = e.currentTarget;
+                  const data = new FormData(form);
+                  const v = (k: string) => String(data.get(k) || "").trim();
+                  const name = v("name");
+                  const role = v("role");
+
+                  data.append("access_key", WEB3FORMS_KEY);
+                  data.append("from_name", "Welwitschia Website — Careers");
+                  data.append("replyto", v("email"));
+                  data.append(
+                    "subject",
+                    `Career enquiry from ${name || "a candidate"}${
+                      role ? ` — ${role}` : ""
+                    }`
+                  );
+
+                  try {
+                    const res = await fetch("https://api.web3forms.com/submit", {
+                      method: "POST",
+                      body: data,
+                    });
+                    const json = await res.json();
+                    if (json.success) setSent(true);
+                    else setError(true);
+                  } catch {
+                    setError(true);
+                  } finally {
+                    setSubmitting(false);
+                  }
                 }}
                 className="mt-9 flex flex-col gap-8"
               >
+                {/* honeypot — hidden from people, catches bots */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden
+                />
                 <div className="grid gap-8 sm:grid-cols-2">
                   <label className="field block">
                     <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">
@@ -201,10 +250,26 @@ export default function CareersModal({
 
                 <div className="pt-1">
                   <Magnetic>
-                    <button type="submit" className="btn-lux btn-gold">
-                      Send to HR
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="btn-lux btn-gold disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                      {submitting ? "Sending…" : "Send to HR"}
                     </button>
                   </Magnetic>
+                  {error && (
+                    <p className="mt-4 text-[13px] leading-[1.7] text-ivory/70">
+                      Something went wrong. Please email us directly at{" "}
+                      <a
+                        href={`mailto:${HR_TO}`}
+                        className="text-gold-deep underline-offset-2 hover:underline"
+                      >
+                        {HR_TO}
+                      </a>
+                      .
+                    </p>
+                  )}
                 </div>
               </form>
             </>

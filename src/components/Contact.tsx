@@ -5,6 +5,15 @@ import { useReveal } from "@/lib/useReveal";
 import Magnetic from "@/components/Magnetic";
 
 const PHONES = ["+91 94985 02143", "+91 94985 02141", "+91 87784 98208"];
+const EMAILS = [
+  "COO.shanu@welwitschiainvestment.com",
+  "sales.narendran@welwitschiainvestment.com",
+];
+const ENQUIRY_TO = "COO.shanu@welwitschiainvestment.com";
+// Web3Forms delivers submissions to the inbox registered to this (public) key.
+const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||
+  "2e3b2057-015d-441c-8a1c-367b3c33cdff";
 
 /* deterministic pseudo-random for the dotted world map */
 const rand = (seed: number) => {
@@ -57,11 +66,40 @@ function DottedMap() {
 export default function Contact() {
   const rootRef = useRef<HTMLElement>(null);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   useReveal(rootRef);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    setError(false);
+    setSubmitting(true);
+
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") || "").trim();
+    const interest = String(data.get("interest") || "").trim();
+
+    data.append("access_key", WEB3FORMS_KEY);
+    data.append("from_name", "Welwitschia Website — Enquiry");
+    data.append("replyto", String(data.get("email") || "").trim());
+    data.append(
+      "subject",
+      `New enquiry from ${name || "the website"}${interest ? ` — ${interest}` : ""}`
+    );
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+      });
+      const json = await res.json();
+      if (json.success) setSent(true);
+      else setError(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -120,6 +158,17 @@ export default function Contact() {
                   </a>
                 ))}
               </div>
+              <div className="mt-6 space-y-2">
+                {EMAILS.map((m) => (
+                  <a
+                    key={m}
+                    href={`mailto:${m}`}
+                    className="block w-fit break-all text-[13.5px] tracking-wide text-ivory/70 transition-colors duration-300 hover:text-gold-2"
+                  >
+                    {m}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -129,14 +178,23 @@ export default function Contact() {
               <div className="flex h-full min-h-[380px] flex-col items-center justify-center text-center">
                 <div className="hairline w-24" />
                 <h3 className="mt-8 font-heading text-3xl text-gold-2">Thank you.</h3>
-                <p className="mt-5 max-w-[380px] text-[14px] leading-[1.9] text-ivory/60">
-                  Your enquiry has been received. A member of our private
-                  office will be in touch shortly.
+                <p className="mt-5 max-w-[400px] text-[14px] leading-[1.9] text-ivory/60">
+                  Your enquiry has been received by our private office. A member
+                  of our team will be in touch shortly.
                 </p>
                 <div className="hairline mt-8 w-24" />
               </div>
             ) : (
               <form onSubmit={onSubmit} className="flex h-full flex-col gap-9">
+                {/* honeypot — hidden from people, catches bots */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden
+                />
                 <div className="grid gap-9 sm:grid-cols-2">
                   <label className="field block">
                     <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/45">
@@ -196,10 +254,26 @@ export default function Contact() {
                 </label>
                 <div className="mt-auto pt-2">
                   <Magnetic>
-                    <button type="submit" className="btn-lux btn-gold">
-                      Submit Enquiry
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="btn-lux btn-gold disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                      {submitting ? "Sending…" : "Submit Enquiry"}
                     </button>
                   </Magnetic>
+                  {error && (
+                    <p className="mt-4 text-[13px] leading-[1.7] text-ivory/70">
+                      Something went wrong. Please email us directly at{" "}
+                      <a
+                        href={`mailto:${ENQUIRY_TO}`}
+                        className="text-gold-2 underline-offset-2 hover:underline"
+                      >
+                        {ENQUIRY_TO}
+                      </a>
+                      .
+                    </p>
+                  )}
                 </div>
               </form>
             )}
