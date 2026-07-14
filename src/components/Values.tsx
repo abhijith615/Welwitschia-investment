@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsapSetup";
 import { useReveal } from "@/lib/useReveal";
 
@@ -8,32 +8,33 @@ const VALUES = [
   {
     n: "I",
     title: "Integrity",
-    body: "We uphold the highest ethical standards in every decision.",
+    body: "Integrity is the foundation of every relationship we build and every decision we make. We uphold the highest standards of honesty, transparency, and ethical conduct in all our interactions. By consistently acting with accountability and fairness, we earn the trust of our clients, partners, and stakeholders. Our commitment to doing what is right ensures sustainable success and long-term credibility.",
   },
   {
     n: "II",
     title: "Resilience",
-    body: "We navigate changing markets with confidence and discipline.",
+    body: "We embrace challenges with determination and adaptability, viewing every obstacle as an opportunity to grow. Our resilient mindset enables us to navigate changing market conditions while remaining focused on delivering exceptional outcomes. We learn from every experience, continuously evolve, and respond with confidence to uncertainty. This strength allows us to create lasting value for our clients and our organization.",
   },
   {
     n: "III",
     title: "Innovation",
-    body: "We seek forward-thinking opportunities that drive growth.",
+    body: "Innovation drives our pursuit of better solutions and meaningful progress. We continuously explore new ideas, technologies, and strategies to enhance the value we deliver to our clients. By fostering a culture of creativity and forward thinking, we stay ahead of industry trends and evolving customer needs. Our commitment to innovation ensures we remain agile, competitive, and future-ready.",
   },
   {
     n: "IV",
     title: "Excellence",
-    body: "We are committed to delivering exceptional results.",
+    body: "Excellence is reflected in the quality of our work, the standards we uphold, and the results we achieve. We strive for continuous improvement by combining expertise, precision, and attention to detail in everything we do. Our focus on delivering superior outcomes consistently exceeds expectations and builds lasting confidence among our stakeholders. We believe excellence is a journey of continuous refinement rather than a destination.",
   },
   {
     n: "V",
     title: "Partnership",
-    body: "We build lasting relationships founded on trust and mutual success.",
+    body: "We believe the strongest outcomes are built through meaningful collaboration and mutual trust. By working closely with clients, investors, and strategic partners, we create solutions that align with shared goals and long-term success. We value open communication, respect diverse perspectives, and foster relationships based on transparency and accountability. Together, we achieve sustainable growth and create enduring value for everyone involved.",
   },
 ];
 
 export default function Values() {
   const rootRef = useRef<HTMLElement>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   useReveal(rootRef);
 
   useEffect(() => {
@@ -41,16 +42,15 @@ export default function Values() {
     if (!root || prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        ".value-card",
-        { y: 110, opacity: 0, rotateX: 8, transformPerspective: 900 },
+        ".value-row",
+        { y: 46, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          rotateX: 0,
-          duration: 1.5,
+          duration: 1.2,
           ease: "power3.out",
-          stagger: 0.12,
-          scrollTrigger: { trigger: ".values-row", start: "top 82%" },
+          stagger: 0.1,
+          scrollTrigger: { trigger: ".values-list", start: "top 82%" },
         }
       );
       // slow parallax drift on the architectural backdrop
@@ -85,7 +85,7 @@ export default function Values() {
         className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#efe3d5] to-transparent"
       />
       <div className="relative mx-auto max-w-[1440px] px-6 md:px-12">
-        <div className="mb-24 text-center">
+        <div className="mb-20 text-center">
           <p className="eyebrow justify-center" data-reveal="fade">
             Our Values
           </p>
@@ -97,34 +97,57 @@ export default function Values() {
           </h2>
         </div>
 
-        <div className="values-row grid gap-5 md:grid-cols-3 lg:grid-cols-5">
-          {VALUES.map((v) => (
-            <article
-              key={v.title}
-              className="value-card group glass relative flex min-h-[220px] flex-col justify-between gap-6 overflow-hidden rounded-xl p-8 transition-transform duration-700 hover:-translate-y-2.5 lg:min-h-[440px]"
-            >
-              {/* hover illumination */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 90% 60% at 50% 0%, rgba(200,166,90,0.13), transparent 65%)",
-                }}
-              />
-              {/* gold outline that brightens */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-xl border border-gold/0 transition-colors duration-700 group-hover:border-gold/35"
-              />
-              <div>
-                <h3 className="font-heading text-[26px] text-ivory lg:[writing-mode:vertical-rl]">
-                  {v.title}
-                </h3>
+        <div className="values-list mx-auto max-w-[860px]">
+          {VALUES.map((v, i) => {
+            const open = openIndex === i;
+            return (
+              <div key={v.title} className="value-row border-b border-hair first:border-t">
+                <button
+                  onClick={() => setOpenIndex(open ? null : i)}
+                  aria-expanded={open}
+                  className="group flex w-full items-center justify-between gap-6 py-7 text-left md:py-9"
+                >
+                  <span className="flex items-baseline gap-5 md:gap-8">
+                    <span className="font-body text-[11px] tracking-[0.3em] text-gold/55">
+                      {v.n}
+                    </span>
+                    <span
+                      className={`font-heading text-[1.6rem] leading-tight transition-colors duration-500 md:text-[2.1rem] ${
+                        open ? "text-gold-2" : "text-white-soft group-hover:text-gold-2"
+                      }`}
+                    >
+                      {v.title}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/30 transition-colors duration-500 group-hover:border-gold/60"
+                  >
+                    <span
+                      className={`absolute inset-0 m-auto h-px w-3.5 bg-gold-2 transition-transform duration-500 ${
+                        open ? "rotate-45" : ""
+                      }`}
+                    />
+                    <span
+                      className={`absolute inset-0 m-auto h-3.5 w-px bg-gold-2 transition-transform duration-500 ${
+                        open ? "-rotate-45" : ""
+                      }`}
+                    />
+                  </span>
+                </button>
+                <div
+                  className="grid transition-[grid-template-rows] duration-500 ease-out"
+                  style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <p className="max-w-[660px] pb-8 text-[14.5px] leading-[1.9] text-ivory/65 md:pb-10">
+                      {v.body}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <p className="text-[13px] leading-[1.85] text-ivory/55">{v.body}</p>
-            </article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
