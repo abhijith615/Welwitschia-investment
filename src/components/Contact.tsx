@@ -51,16 +51,6 @@ function DottedMap() {
       {dots.map((d, i) => (
         <circle key={i} cx={d.x} cy={d.y} r={d.r} fill="#1783a0" opacity={d.o * 0.85} />
       ))}
-      {/* office beacon */}
-      <circle cx="68" cy="58" r="0.9" fill="#b3852f" />
-      <circle cx="68" cy="58" r="0.9" fill="none" stroke="#b3852f" strokeWidth="0.28" opacity="0.85">
-        <animate attributeName="r" values="0.8;4" dur="2.8s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.8;0" dur="2.8s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="68" cy="58" r="0.9" fill="none" stroke="#b3852f" strokeWidth="0.22" opacity="0.6">
-        <animate attributeName="r" values="0.8;4" dur="2.8s" begin="1.4s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.6;0" dur="2.8s" begin="1.4s" repeatCount="indefinite" />
-      </circle>
     </svg>
   );
 }
