@@ -5,16 +5,13 @@ import { useReveal } from "@/lib/useReveal";
 import Magnetic from "@/components/Magnetic";
 
 const PHONES = ["+91 94985 02143", "+91 94985 02141", "+91 87784 98208"];
-const EMAILS = [
-  "COO.shanu@welwitschiainvestment.com",
-  "sales.narendran@welwitschiainvestment.com",
-];
+const EMAILS = ["inquiry@welwitschiainvestment.com"];
 const ADDRESS = [
   "Lakshmi Towers, B Block, 3rd Floor,",
   "Arcot Road, Kodambakkam,",
   "Chennai - 600 024, Tamilnadu, India",
 ];
-const ENQUIRY_TO = "COO.shanu@welwitschiainvestment.com";
+const ENQUIRY_TO = "inquiry@welwitschiainvestment.com";
 // Web3Forms delivers submissions to the inbox registered to this (public) key.
 const WEB3FORMS_KEY =
   process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||

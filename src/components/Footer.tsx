@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { useReveal } from "@/lib/useReveal";
 import CareersModal from "@/components/CareersModal";
+import PaymentDetailsModal from "@/components/PaymentDetailsModal";
 
 const NAV = [
   { href: "#about", label: "About" },
@@ -13,9 +14,21 @@ const NAV = [
   { href: "#contact", label: "Contact" },
 ];
 
+const SOCIALS = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/welwitschia-investment-private-limited/",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/welwitschiainvestment?igsh=MTR6aXdqNDg2cjQ1MQ==",
+  },
+];
+
 export default function Footer() {
   const rootRef = useRef<HTMLElement>(null);
   const [careersOpen, setCareersOpen] = useState(false);
+  const [paymentOpen, setPaymentOpen] = useState(false);
   useReveal(rootRef);
 
   return (
@@ -73,17 +86,27 @@ export default function Footer() {
                   Careers
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => setPaymentOpen(true)}
+                  className="nav-link text-[10.5px] uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
+                >
+                  Payment
+                </button>
+              </li>
             </ul>
           </nav>
           <ul className="flex gap-7">
-            {["LinkedIn", "X", "Instagram"].map((s) => (
-              <li key={s}>
+            {SOCIALS.map((s) => (
+              <li key={s.label}>
                 <a
-                  href="#top"
-                  aria-label={s}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
                   className="nav-link text-[10.5px] uppercase tracking-[0.26em] text-ivory/40 transition-colors hover:text-gold-2"
                 >
-                  {s}
+                  {s.label}
                 </a>
               </li>
             ))}
@@ -107,6 +130,7 @@ export default function Footer() {
       </div>
 
       <CareersModal open={careersOpen} onClose={() => setCareersOpen(false)} />
+      <PaymentDetailsModal open={paymentOpen} onClose={() => setPaymentOpen(false)} />
     </footer>
   );
 }
