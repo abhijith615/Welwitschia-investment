@@ -72,10 +72,13 @@ export default function TermsPage() {
 
       <h2>6. Risk Disclosure</h2>
       <p>
-        Investments are subject to market and other risks. The value of
-        investments and any income from them can go down as well as up, and
-        investors may not recover the amount originally invested. Past
-        performance is not indicative of, and does not guarantee, future results.
+        Investing in financial instruments involves significant risks.
+        Prospective investors should carefully consider whether such
+        investments are suitable for them in light of their financial
+        conditions, investment experience, and risk tolerance. Before making
+        any investment decisions, individuals are strongly advised to review
+        the complete prospectus or offering memorandum and consult with their
+        own financial and legal advisors.
       </p>
 
       <h2>7. Intellectual Property</h2>
@@ -160,8 +163,8 @@ export default function TermsPage() {
         <li>Lakshmi Towers, B Block, 3rd Floor, Arcot Road, Kodambakkam, Chennai&nbsp;-&nbsp;600&nbsp;024, Tamil Nadu, India</li>
         <li>
           Email:{" "}
-          <a href="mailto:COO.shanu@welwitschiainvestment.com">
-            COO.shanu@welwitschiainvestment.com
+          <a href="mailto:coo.shanu@welwitschiainvestment.com">
+            coo.shanu@welwitschiainvestment.com
           </a>
         </li>
       </ul>

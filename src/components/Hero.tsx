@@ -136,7 +136,7 @@ export default function Hero() {
           <span className="gold-line">Built for Growth.</span>
         </h1>
 
-        <p className="hero-tag-line mt-9 font-serif-alt text-[clamp(0.95rem,1.9vw,1.45rem)] italic text-ivory/75">
+        <p className="hero-tag-line mt-9 font-serif-alt text-[clamp(1.15rem,2.4vw,1.85rem)] font-bold italic tracking-wide text-white-soft">
           Strong Roots. Strong Returns. Growing Wealth, Naturally.
         </p>
 

@@ -34,9 +34,10 @@ export default function PrivacyPolicyPage() {
       <h2>1. Data Fiduciary</h2>
       <p>
         For the purposes of the DPDP Act, Welwitschia Investment Private Limited
-        is the <strong>Data Fiduciary</strong> that determines the purpose and
-        means of processing your personal data. Our contact details are set out
-        in the &ldquo;Grievance Redressal&rdquo; section below.
+        is the <strong>Data Fiduciary</strong>{" "}
+        that determines the purpose and means of processing your personal
+        data. Our contact details are set out in the &ldquo;Grievance
+        Redressal&rdquo; section below.
       </p>
 
       <h2>2. Personal Data We Collect</h2>
@@ -204,8 +205,8 @@ export default function PrivacyPolicyPage() {
         <li>Lakshmi Towers, B Block, 3rd Floor, Arcot Road, Kodambakkam, Chennai&nbsp;-&nbsp;600&nbsp;024, Tamil Nadu, India</li>
         <li>
           Email:{" "}
-          <a href="mailto:COO.shanu@welwitschiainvestment.com">
-            COO.shanu@welwitschiainvestment.com
+          <a href="mailto:coo.shanu@welwitschiainvestment.com">
+            coo.shanu@welwitschiainvestment.com
           </a>
         </li>
       </ul>
