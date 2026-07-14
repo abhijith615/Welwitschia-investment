@@ -384,6 +384,66 @@ body {
   82%, 100% { transform: translateX(80%); }
 }
 
+/* ---------- legal document prose (cream surface) ---------- */
+.legal-prose {
+  color: #33535b;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.legal-prose p {
+  margin-top: 1.05rem;
+}
+.legal-prose h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  line-height: 1.2;
+  color: #10272d;
+  margin-top: 3rem;
+  margin-bottom: 0.35rem;
+}
+.legal-prose h2:first-child {
+  margin-top: 0;
+}
+.legal-prose h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: #163038;
+  margin-top: 1.75rem;
+  margin-bottom: 0.35rem;
+}
+.legal-prose ul {
+  margin-top: 0.9rem;
+  padding-left: 0;
+  list-style: none;
+}
+.legal-prose li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin-top: 0.55rem;
+}
+.legal-prose li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85em;
+  width: 7px;
+  height: 1px;
+  background: var(--color-gold);
+}
+.legal-prose a {
+  color: #957130;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal-prose strong {
+  color: #10272d;
+  font-weight: 600;
+}
+.legal-prose .lead {
+  font-size: 16px;
+  color: #274a52;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logo-sheen::after,
   .text-gold-sheen {

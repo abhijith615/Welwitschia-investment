@@ -9,6 +9,11 @@ const EMAILS = [
   "COO.shanu@welwitschiainvestment.com",
   "sales.narendran@welwitschiainvestment.com",
 ];
+const ADDRESS = [
+  "Lakshmi Towers, B Block, 3rd Floor,",
+  "Arcot Road, Kodambakkam,",
+  "Chennai - 600 024, Tamilnadu, India",
+];
 const ENQUIRY_TO = "COO.shanu@welwitschiainvestment.com";
 // Web3Forms delivers submissions to the inbox registered to this (public) key.
 const WEB3FORMS_KEY =
@@ -60,6 +65,44 @@ function DottedMap() {
         <animate attributeName="opacity" values="0.6;0" dur="2.8s" begin="1.4s" repeatCount="indefinite" />
       </circle>
     </svg>
+  );
+}
+
+const PinIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z" stroke="currentColor" strokeWidth="1.6" />
+    <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
+const PhoneIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <path
+      d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2Z"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+const MailIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6" />
+    <path d="m4 7 8 6 8-6" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
+
+function DetailLabel({
+  icon,
+  children,
+}: {
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-center gap-2.5 text-[10px] uppercase tracking-[0.3em] text-gold">
+      <span aria-hidden>{icon}</span>
+      {children}
+    </div>
   );
 }
 
@@ -138,7 +181,7 @@ export default function Contact() {
             <div className="absolute inset-0 opacity-80">
               <DottedMap />
             </div>
-            <div className="relative flex h-full flex-col justify-end p-10 md:p-14">
+            <div className="relative flex h-full flex-col justify-center p-10 md:p-14">
               <p className="text-[10.5px] uppercase tracking-[0.35em] text-gold">
                 The Private Office
               </p>
@@ -147,27 +190,48 @@ export default function Contact() {
                 <br />
                 Private Limited
               </h3>
-              <div className="mt-8 space-y-2.5">
-                {PHONES.map((p) => (
-                  <a
-                    key={p}
-                    href={`tel:${p.replace(/\s/g, "")}`}
-                    className="block w-fit text-[15px] tracking-wide text-ivory/70 transition-colors duration-300 hover:text-gold-2"
-                  >
-                    {p}
-                  </a>
-                ))}
-              </div>
-              <div className="mt-6 space-y-2">
-                {EMAILS.map((m) => (
-                  <a
-                    key={m}
-                    href={`mailto:${m}`}
-                    className="block w-fit break-all text-[13.5px] tracking-wide text-ivory/70 transition-colors duration-300 hover:text-gold-2"
-                  >
-                    {m}
-                  </a>
-                ))}
+
+              <div className="mt-8 space-y-6">
+                <div>
+                  <DetailLabel icon={<PinIcon />}>Address</DetailLabel>
+                  <address className="mt-2.5 not-italic text-[14px] leading-[1.7] text-ivory/70">
+                    {ADDRESS.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </address>
+                </div>
+
+                <div>
+                  <DetailLabel icon={<PhoneIcon />}>Phone</DetailLabel>
+                  <div className="mt-2.5 space-y-1.5">
+                    {PHONES.map((p) => (
+                      <a
+                        key={p}
+                        href={`tel:${p.replace(/\s/g, "")}`}
+                        className="block w-fit text-[15px] tracking-wide text-ivory/70 transition-colors duration-300 hover:text-gold-2"
+                      >
+                        {p}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <DetailLabel icon={<MailIcon />}>Email</DetailLabel>
+                  <div className="mt-2.5 space-y-1.5">
+                    {EMAILS.map((m) => (
+                      <a
+                        key={m}
+                        href={`mailto:${m}`}
+                        className="block w-fit break-all text-[13.5px] tracking-wide text-ivory/70 transition-colors duration-300 hover:text-gold-2"
+                      >
+                        {m}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
