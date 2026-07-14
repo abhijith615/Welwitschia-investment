@@ -218,6 +218,18 @@ export default function Contact() {
                 </div>
                 <label className="field block">
                   <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/45">
+                    Contact Number <span className="normal-case tracking-normal text-ivory/35">(optional)</span>
+                  </span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    className="input-lux"
+                    placeholder="+91 00000 00000"
+                    autoComplete="tel"
+                  />
+                </label>
+                <label className="field block">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/45">
                     Area of Interest
                   </span>
                   <select name="interest" className="input-lux bg-transparent" defaultValue="">
