@@ -107,10 +107,7 @@ export default function Values() {
                   aria-expanded={open}
                   className="group flex w-full items-center justify-between gap-6 py-7 text-left md:py-9"
                 >
-                  <span className="flex items-baseline gap-5 md:gap-8">
-                    <span className="font-body text-[11px] tracking-[0.3em] text-gold/55">
-                      {v.n}
-                    </span>
+                  <span className="flex items-baseline">
                     <span
                       className={`font-heading text-[1.6rem] leading-tight transition-colors duration-500 md:text-[2.1rem] ${
                         open ? "text-gold-2" : "text-white-soft group-hover:text-gold-2"
