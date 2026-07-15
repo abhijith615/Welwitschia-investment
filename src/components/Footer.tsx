@@ -72,7 +72,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="nav-link text-[10.5px] uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
+                    className="nav-link text-[12.6px] font-bold uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
                   >
                     {l.label}
                   </a>
@@ -81,7 +81,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => setCareersOpen(true)}
-                  className="nav-link text-[10.5px] uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
+                  className="nav-link text-[12.6px] font-bold uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
                 >
                   Careers
                 </button>
@@ -89,7 +89,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => setPaymentOpen(true)}
-                  className="nav-link text-[10.5px] uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
+                  className="nav-link text-[12.6px] font-bold uppercase tracking-[0.26em] text-ivory/55 transition-colors hover:text-ivory"
                 >
                   Payment
                 </button>
@@ -104,7 +104,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="nav-link text-[10.5px] uppercase tracking-[0.26em] text-ivory/40 transition-colors hover:text-gold-2"
+                  className="nav-link text-[12.6px] font-bold uppercase tracking-[0.26em] text-ivory/40 transition-colors hover:text-gold-2"
                 >
                   {s.label}
                 </a>
