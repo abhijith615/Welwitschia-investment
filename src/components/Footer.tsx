@@ -55,7 +55,9 @@ export default function Footer() {
               width={1200}
               height={604}
               sizes="380px"
-              className="h-auto w-full opacity-95"
+              // lift brightness/saturation so the aqua wordmark reads on the
+              // dark teal footer (the logo art's text is a deep teal)
+              className="h-auto w-full [filter:brightness(1.5)_saturate(1.25)]"
             />
           </div>
           <p className="mt-8 font-serif-alt text-base italic text-ivory/40" data-reveal="fade">

@@ -53,7 +53,10 @@ export default function Nav() {
             height={267}
             sizes="225px"
             priority
-            className="h-auto w-full"
+            // brighten over the dark hero; keep natural on the cream scrolled bar
+            className={`h-auto w-full transition-[filter] duration-500 ${
+              scrolled ? "" : "[filter:brightness(1.45)_saturate(1.2)]"
+            }`}
           />
         </a>
 
