@@ -84,13 +84,13 @@ export default function Preloader() {
       <div className="pre-panel-bottom absolute inset-x-0 bottom-0 h-1/2 bg-[#07242c]" />
 
       <div className="pre-center absolute inset-0 flex flex-col items-center justify-center gap-8">
-        <div className="pre-mark logo-sheen relative w-[210px] md:w-[280px]">
+        <div className="pre-mark logo-sheen relative w-[220px] md:w-[290px]">
           <Image
             src="/logo-mark.png"
             alt=""
             width={800}
-            height={251}
-            sizes="280px"
+            height={210}
+            sizes="290px"
             priority
             className="h-auto w-full"
           />
