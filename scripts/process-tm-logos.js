@@ -43,6 +43,34 @@ async function keyChecker(srcPath) {
   return sharp(rgba, { raw: { width: w, height: h, channels: 4 } }).trim({ threshold: 16 }).png().toBuffer();
 }
 
+// find the vertical gap between the monogram and the wordmark by scanning
+// alpha row-sums, rather than guessing a fixed height fraction (which cut
+// the monogram's lower tails off on this source's proportions).
+async function findMonogramBottom(buf) {
+  const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const w = info.width, h = info.height, ch = info.channels;
+  const rowHasContent = new Array(h).fill(false);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (data[(y * w + x) * ch + 3] > 20) { rowHasContent[y] = true; break; }
+    }
+  }
+  let firstContent = rowHasContent.indexOf(true);
+  if (firstContent < 0) firstContent = 0;
+  // walk down from the first content row; the first run of >=10 consecutive
+  // empty rows after that marks the gap before the wordmark begins
+  let emptyRun = 0;
+  for (let y = firstContent; y < h; y++) {
+    if (!rowHasContent[y]) {
+      emptyRun++;
+      if (emptyRun >= 10) return y - emptyRun + Math.round(h * 0.015); // small pad
+    } else {
+      emptyRun = 0;
+    }
+  }
+  return Math.round(h * 0.52); // fallback if no gap found
+}
+
 async function navyPreview(buf, name) {
   const b = await sharp(buf).resize({ width: 900 }).toBuffer();
   const m = await sharp(b).metadata();
@@ -68,8 +96,10 @@ async function navyPreview(buf, name) {
   await navyPreview(stackedOut, "logo-stacked");
 
   const meta = await sharp(stacked).metadata();
+  const monogramBottom = await findMonogramBottom(stacked);
+  console.log("monogram/wordmark gap detected at row", monogramBottom, "of", meta.height);
   const mark = await sharp(stacked)
-    .extract({ left: 0, top: 0, width: meta.width, height: Math.round(meta.height * 0.52) })
+    .extract({ left: 0, top: 0, width: meta.width, height: monogramBottom })
     .trim({ threshold: 16 })
     .resize({ width: 800 })
     .png({ compressionLevel: 9 })

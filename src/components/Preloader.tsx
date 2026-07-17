@@ -89,7 +89,7 @@ export default function Preloader() {
             src="/logo-mark.png"
             alt=""
             width={800}
-            height={209}
+            height={228}
             sizes="290px"
             priority
             className="h-auto w-full"
