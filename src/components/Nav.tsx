@@ -50,7 +50,7 @@ export default function Nav() {
             src="/logo-horizontal.png"
             alt="Welwitschia Investment Private Limited"
             width={1200}
-            height={265}
+            height={264}
             sizes="225px"
             priority
             className="h-auto w-full"

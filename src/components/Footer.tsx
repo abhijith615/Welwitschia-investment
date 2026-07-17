@@ -53,7 +53,7 @@ export default function Footer() {
               src="/logo-stacked.png"
               alt="Welwitschia Investment Private Limited"
               width={1200}
-              height={603}
+              height={607}
               sizes="380px"
               className="h-auto w-full"
             />
