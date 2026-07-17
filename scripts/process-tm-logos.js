@@ -1,10 +1,8 @@
-/* Keys the dark background out of the trademark logo JPEGs (gold monogram +
-   aqua wordmark on near-black). The art is saturated and/or bright while the
-   background is dark and neutral, so alpha = max(chroma, brightness-above-bg):
-     - chroma keeps the gold and the aqua type
-     - brightness keeps the bright metal highlights (no interior mottling)
-     - the dark ground, the letter counters and the centre gap all drop out
-   Edge anti-aliasing blends toward black, which vanishes on the dark site. */
+/* The "transparent" TM logo exports actually have the checkerboard pattern
+   baked into their RGB pixels (no real alpha channel) — both checker tones
+   are neutral grey, so we key by chroma/brightness the same way as the
+   solid-background sources, just with a slightly wider neutral band to
+   catch both the light and dark checker squares. */
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
@@ -18,33 +16,29 @@ const smooth = (a, b, x) => {
   return t * t * (3 - 2 * t);
 };
 
-async function keyDark(srcPath) {
+async function keyChecker(srcPath) {
   const { data, info } = await sharp(srcPath).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const w = info.width, h = info.height, N = w * h;
 
-  // background luminance from the four corners
-  let bl = 0, n = 0;
-  const corners = [[0, 0], [w - 8, 0], [0, h - 8], [w - 8, h - 8]];
-  for (const [x, y] of corners) {
-    for (let dy = 0; dy < 8; dy++) for (let dx = 0; dx < 8; dx++) {
-      const i = ((y + dy) * w + (x + dx)) * 3;
-      bl += 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]; n++;
-    }
-  }
-  bl /= n;
-
-  const rgba = Buffer.alloc(N * 4);
+  // soft alpha purely from chroma: the checkerboard (both tones, and any
+  // blurred blend between them) is neutral grey; the art (gold + aqua) is
+  // strongly saturated. Genuine specular highlights on the metal still
+  // carry enough chroma to pass this on their own -- nothing legitimate
+  // is lost by treating every neutral pixel here as background.
+  const aSoft = new Float32Array(N);
   for (let p = 0; p < N; p++) {
     const i = p * 3;
     const r = data[i], g = data[i + 1], b = data[i + 2];
     const chroma = Math.max(r, g, b) - Math.min(r, g, b);
-    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-    const aChroma = smooth(28, 70, chroma);
-    const aBright = smooth(bl + 55, bl + 115, lum);
-    rgba[p * 4] = r;
-    rgba[p * 4 + 1] = g;
-    rgba[p * 4 + 2] = b;
-    rgba[p * 4 + 3] = Math.round(Math.min(1, Math.max(aChroma, aBright)) * 255);
+    aSoft[p] = smooth(22, 55, chroma);
+  }
+
+  const rgba = Buffer.alloc(N * 4);
+  for (let p = 0; p < N; p++) {
+    rgba[p * 4] = data[p * 3];
+    rgba[p * 4 + 1] = data[p * 3 + 1];
+    rgba[p * 4 + 2] = data[p * 3 + 2];
+    rgba[p * 4 + 3] = Math.round(Math.min(1, aSoft[p]) * 255);
   }
   return sharp(rgba, { raw: { width: w, height: h, channels: 4 } }).trim({ threshold: 16 }).png().toBuffer();
 }
@@ -59,23 +53,20 @@ async function navyPreview(buf, name) {
 }
 
 (async () => {
-  // horizontal
-  const horiz = await keyDark(path.join(SRC, "Logo horizontal TM dark.jpeg"));
+  const horiz = await keyChecker(path.join(SRC, "Logo horizontal transparent.png"));
   const horizOut = await sharp(horiz).resize({ width: 1200 }).png({ compressionLevel: 9 }).toBuffer();
   fs.writeFileSync(path.join(PUBLIC, "logo-horizontal.png"), horizOut);
   const hm = await sharp(horizOut).metadata();
   console.log("logo-horizontal.png", hm.width + "x" + hm.height, (horizOut.length / 1024).toFixed(0) + "KB");
   await navyPreview(horizOut, "logo-horizontal");
 
-  // stacked
-  const stacked = await keyDark(path.join(SRC, "Logo stacked TM dark.jpeg"));
+  const stacked = await keyChecker(path.join(SRC, "Logo stacked transparent.png"));
   const stackedOut = await sharp(stacked).resize({ width: 1200 }).png({ compressionLevel: 9 }).toBuffer();
   fs.writeFileSync(path.join(PUBLIC, "logo-stacked.png"), stackedOut);
   const sm = await sharp(stackedOut).metadata();
   console.log("logo-stacked.png", sm.width + "x" + sm.height, (stackedOut.length / 1024).toFixed(0) + "KB");
   await navyPreview(stackedOut, "logo-stacked");
 
-  // monogram mark = top (monogram) region of the keyed stacked lockup, re-trimmed
   const meta = await sharp(stacked).metadata();
   const mark = await sharp(stacked)
     .extract({ left: 0, top: 0, width: meta.width, height: Math.round(meta.height * 0.52) })

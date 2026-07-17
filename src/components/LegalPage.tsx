@@ -21,7 +21,7 @@ export default function LegalPage({
               src="/logo-horizontal.png"
               alt="Welwitschia Investment Private Limited"
               width={1200}
-              height={267}
+              height={265}
               sizes="200px"
               priority
               className="h-auto w-full"

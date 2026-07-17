@@ -50,13 +50,10 @@ export default function Nav() {
             src="/logo-horizontal.png"
             alt="Welwitschia Investment Private Limited"
             width={1200}
-            height={267}
+            height={265}
             sizes="225px"
             priority
-            // brighten over the dark hero; keep natural on the cream scrolled bar
-            className={`h-auto w-full transition-[filter] duration-500 ${
-              scrolled ? "" : "[filter:brightness(1.45)_saturate(1.2)]"
-            }`}
+            className="h-auto w-full"
           />
         </a>
 

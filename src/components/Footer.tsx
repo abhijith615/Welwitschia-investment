@@ -53,11 +53,9 @@ export default function Footer() {
               src="/logo-stacked.png"
               alt="Welwitschia Investment Private Limited"
               width={1200}
-              height={604}
+              height={603}
               sizes="380px"
-              // lift brightness/saturation so the aqua wordmark reads on the
-              // dark teal footer (the logo art's text is a deep teal)
-              className="h-auto w-full [filter:brightness(1.5)_saturate(1.25)]"
+              className="h-auto w-full"
             />
           </div>
           <p className="mt-8 font-serif-alt text-base italic text-ivory/40" data-reveal="fade">
